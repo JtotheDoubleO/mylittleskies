@@ -14,6 +14,7 @@
     "build": "npm run build -w shared && npm run build -w client && npm run build -w server",
     "build:client": "npm run build -w client",
     "build:server": "npm run build -w server",
+    "build:vercel": "npm run build -w client",
     "deploy": "railway up --detach && npx vercel@latest deploy --prod --yes",
     "deploy:server": "railway up --detach",
     "deploy:client": "npx vercel@latest deploy --prod --yes",
