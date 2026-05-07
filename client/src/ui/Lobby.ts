@@ -210,8 +210,8 @@ export class Lobby {
           aria-label="GitHub repository"
         >
           <span class="lobby-github__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 28" width="22" height="26" xmlns="http://www.w3.org/2000/svg" focusable="false">
-              <rect x="3" y="16" width="18" height="9" rx="2" fill="#3d3d45" />
+            <svg class="lobby-github__joystick" viewBox="0 0 24 28" width="22" height="26" xmlns="http://www.w3.org/2000/svg" focusable="false">
+              <rect x="3" y="16" width="18" height="9" rx="2" fill="#3a3a42" />
               <circle cx="8" cy="19" r="1.6" fill="#c62828" />
               <rect x="11" y="8" width="2" height="12" rx="0.5" fill="#1a1a1e" />
               <circle cx="12" cy="6" r="3.2" fill="#e53935" />
@@ -587,23 +587,26 @@ export class Lobby {
         pointer-events: auto;
         display: inline-flex;
         align-items: center;
-        gap: 9px;
+        gap: 6px;
         box-sizing: border-box;
-        min-height: 44px;
-        padding: 7px 14px 8px 10px;
-        background: rgba(0, 0, 0, 0.94);
-        border: 1px solid rgba(125, 200, 255, 0.52);
-        border-radius: 12px 10px 10px 10px;
-        box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+        min-height: 40px;
+        padding: 5px 14px 5px 10px;
+        background: #000000;
+        border: 1px solid rgba(110, 185, 255, 0.42);
+        border-radius: 9999px;
+        box-shadow:
+          0 2px 10px rgba(0, 0, 0, 0.55),
+          inset 0 1px 0 rgba(255, 255, 255, 0.07);
         font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         font-weight: 700;
-        font-size: clamp(0.74rem, 2vw, 0.9rem);
-        letter-spacing: 0.02em;
+        font-size: clamp(0.72rem, 2vw, 0.86rem);
+        letter-spacing: 0.03em;
         color: #ffffff;
         text-decoration: none;
+        -webkit-tap-highlight-color: transparent;
         opacity: 0;
-        transition: opacity 0.8s ease-out, background 0.15s ease, border-color 0.15s ease;
-        transition-delay: 0.35s, 0s, 0s;
+        transition: opacity 0.8s ease-out, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+        transition-delay: 0.35s, 0s, 0s, 0s;
       }
       .lobby-github__mark {
         display: flex;
@@ -612,7 +615,7 @@ export class Lobby {
         flex-shrink: 0;
         line-height: 0;
       }
-      .lobby-github__mark svg {
+      .lobby-github__joystick {
         display: block;
       }
       .lobby-github__text {
@@ -620,9 +623,16 @@ export class Lobby {
         text-decoration: none;
       }
       .lobby-github:hover {
-        background: rgba(8, 8, 12, 0.98);
-        border-color: rgba(165, 220, 255, 0.78);
+        background: #080808;
+        border-color: rgba(155, 215, 255, 0.65);
+        box-shadow:
+          0 3px 14px rgba(0, 0, 0, 0.6),
+          inset 0 1px 0 rgba(255, 255, 255, 0.09);
         color: #ffffff;
+      }
+      .lobby-github:focus-visible {
+        outline: 2px solid rgba(155, 215, 255, 0.85);
+        outline-offset: 3px;
       }
       .lobby-header.visible ~ .lobby-github {
         opacity: 1;
