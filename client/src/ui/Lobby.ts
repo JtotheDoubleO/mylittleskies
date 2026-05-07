@@ -22,11 +22,7 @@ const VEHICLE_ICON_SRC: Record<Vehicle, string> = {
 
 const LOBBY_DISPLAY_TITLE = "Tiny Skies";
 
-/** Bottom-right pill only — change these two values. */
-const LOBBY_RAIL_HREF = "https://github.com/JtotheDoubleO/mylittleskies";
-const LOBBY_RAIL_LABEL = "_jooie98";
-
-const PORTAL_ICON_SRC = "/2D/icon_portal.svg";
+const LOBBY_GITHUB_HREF = "https://github.com/JtotheDoubleO/mylittleskies";
 
 /** Last per-letter animation index (non-space chars); drives tagline entrance delay. */
 const LOBBY_TITLE_LAST_CHAR_I = Math.max(
@@ -207,14 +203,16 @@ export class Lobby {
           </div>
         </div>
         <a
-          class="lobby-vibejam-portal lobby-vibejam-portal--rail-right"
-          href="${LOBBY_RAIL_HREF}"
+          class="lobby-github"
+          href="${LOBBY_GITHUB_HREF}"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="${LOBBY_RAIL_LABEL}"
+          aria-label="GitHub repository"
         >
-          <img src="${PORTAL_ICON_SRC}" alt="" width="26" height="26" decoding="async" />
-          <span class="lobby-vibejam-portal__label" aria-hidden="true">${LOBBY_RAIL_LABEL}</span>
+          <svg class="lobby-github__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 96" width="20" height="20" aria-hidden="true" focusable="false">
+            <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.317-3.015.317-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.195-22.262-5.379-22.262-24.022 0-5.395 1.962-9.778 5.052-13.233-.485-1.195-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.843.485 13.038 3.155 3.455 5.051 7.838 5.051 13.233 0 18.643-11.404 22.827-22.324 24.022 1.754 1.478 3.316 4.401 3.316 8.847 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.934 33.405-46.69C97.707 22 75.788 0 48.854 0z" />
+          </svg>
+          <span class="lobby-github__text">GitHub</span>
         </a>
         <p class="lobby-attribution">Built with <strong class="lobby-attribution__brand">Cursor</strong>, Music by <strong class="lobby-attribution__brand">Suno</strong>, SFX by <strong class="lobby-attribution__brand">ElevenLabs</strong>, 3D Assets by <strong class="lobby-attribution__brand">Tripo3D</strong></p>
       </div>
@@ -577,97 +575,44 @@ export class Lobby {
         display: none !important;
       }
 
-      .lobby-vibejam-portal {
+      .lobby-github {
         position: fixed;
-        left: max(12px, calc(env(safe-area-inset-left, 0px) + 8px));
+        right: max(12px, calc(env(safe-area-inset-right, 0px) + 8px));
         bottom: max(12px, calc(env(safe-area-inset-bottom, 0px) + 8px));
         z-index: 102;
-        display: inline-flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        min-height: 44px;
-        padding: 8px 14px 8px 12px;
-        box-sizing: border-box;
-        border-radius: 12px;
-        background: rgba(0, 0, 0, 0.2);
-        border: none;
-        backdrop-filter: blur(12px) saturate(120%);
-        -webkit-backdrop-filter: blur(12px) saturate(120%);
         pointer-events: auto;
-        box-shadow: none;
-        opacity: 0;
-        transition: background 0.2s, transform 0.15s, opacity 0.8s ease-out;
-        transition-delay: 0s, 0s, 0.35s;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        color: rgba(255, 255, 255, 0.88);
+        font: inherit;
+        font-size: clamp(0.72rem, 1.8vw, 0.82rem);
         text-decoration: none;
-        color: rgba(255, 255, 255, 0.95);
-        font-family: 'Domine', Georgia, serif;
-        font-size: clamp(0.78rem, 1.35vw, 0.88rem);
-        font-weight: 600;
-        letter-spacing: 0.04em;
-        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.8s ease-out;
+        transition-delay: 0.35s;
       }
-      .lobby-vibejam-portal--rail-right {
-        left: auto;
-        right: max(12px, calc(env(safe-area-inset-right, 0px) + 8px));
+      .lobby-github__icon {
+        display: block;
+        flex-shrink: 0;
+        opacity: 0.92;
       }
-      .lobby--mobile .lobby-vibejam-portal--rail-right {
-        gap: 10px;
-        width: auto;
-        height: auto;
-        min-height: 44px;
-        padding: 8px 14px 8px 12px;
+      .lobby-github__text {
+        text-decoration: underline;
+        text-underline-offset: 3px;
       }
-      .lobby--mobile .lobby-vibejam-portal--rail-right .lobby-vibejam-portal__label {
-        display: inline;
+      .lobby-github:hover {
+        color: #ffffff;
       }
-      .lobby-vibejam-portal__label {
-        line-height: 1.2;
-      }
-      .lobby--mobile .lobby-vibejam-portal__label {
-        display: none;
-      }
-      .lobby--mobile .lobby-vibejam-portal {
-        gap: 0;
-        width: 44px;
-        height: 44px;
-        min-height: 44px;
-        padding: 0;
-      }
-      .lobby-header.visible ~ .lobby-vibejam-portal {
+      .lobby-github:hover .lobby-github__icon {
         opacity: 1;
       }
-      .lobby-vibejam-portal:hover {
-        background: rgba(0, 0, 0, 0.32);
-        transform: scale(1.05);
+      .lobby-header.visible ~ .lobby-github {
+        opacity: 1;
       }
-      .lobby-vibejam-portal:active {
-        transform: scale(0.97);
-      }
-      .lobby-vibejam-portal img {
-        width: 26px;
-        height: 26px;
-        display: block;
-        filter: brightness(0) invert(1);
-        opacity: 0.95;
-      }
-      .lobby-overlay.fade-out .lobby-vibejam-portal {
+      .lobby-overlay.fade-out .lobby-github {
         opacity: 0;
         pointer-events: none;
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .lobby-vibejam-portal {
-          transition: background 0.2s;
-          opacity: 1;
-        }
-        .lobby-header.visible ~ .lobby-vibejam-portal {
-          opacity: 1;
-        }
-        .lobby-vibejam-portal:hover,
-        .lobby-vibejam-portal:active {
-          transform: none;
-        }
       }
 
       .lobby-header {
