@@ -31,4 +31,4 @@ jobs:
         with:
           vercel-token: ${{ secrets.VERCEL_TOKEN }}
           working-directory: ./
-          vercel-args: "--prod"
+          vercel-args: "--prod --yes"
