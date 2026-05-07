@@ -72,7 +72,7 @@ import { CosmicWorldPortal, COSMIC_VOID_PORTAL_COUNT } from "./CosmicWorldPortal
 import { EternalFlameWorld } from "./EternalFlameWorld";
 import { VoidMothsManager, type VoidMothPlaneContext } from "./VoidMoths";
 import { VoidFlameShield } from "./VoidFlameShield";
-import { Lobby, generateWhimsicalName } from "../ui/Lobby";
+import { Lobby, generateWhimsicalName, LOBBY_DISPLAY_TITLE } from "../ui/Lobby";
 import { RemotePlayerNameLabels } from "../ui/RemotePlayerNameLabels";
 import { HUD } from "../ui/HUD";
 import {
@@ -2331,7 +2331,7 @@ export class Game {
     });
 
     const title = document.createElement("h1");
-    title.textContent = "Tiny Skies";
+    title.textContent = LOBBY_DISPLAY_TITLE;
     Object.assign(title.style, {
       fontFamily: "'Darumadrop One', 'Domine', Georgia, serif",
       fontSize: "clamp(3.5rem, 14vw, 8.4rem)",

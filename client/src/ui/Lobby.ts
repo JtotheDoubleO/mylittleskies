@@ -20,7 +20,7 @@ const VEHICLE_ICON_SRC: Record<Vehicle, string> = {
   boat: "/2D/icon_boat.svg",
 };
 
-const LOBBY_DISPLAY_TITLE = "Tiny Skies";
+export const LOBBY_DISPLAY_TITLE = "My Little Skies";
 
 const LOBBY_GITHUB_HREF = "https://github.com/JtotheDoubleO/mylittleskies";
 
@@ -209,9 +209,7 @@ export class Lobby {
           rel="noopener noreferrer"
           aria-label="GitHub repository"
         >
-          <svg class="lobby-github__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 98 96" width="20" height="20" aria-hidden="true" focusable="false">
-            <path fill="currentColor" fill-rule="evenodd" clip-rule="evenodd" d="M48.854 0C21.839 0 0 22 0 49.217c0 21.756 13.993 40.172 33.405 46.69 2.427.49 3.316-1.059 3.316-2.362 0-1.141-.08-5.052-.08-9.127-13.59 2.934-16.42-5.867-16.42-5.867-2.184-5.704-5.42-7.17-5.42-7.17-4.448-3.015.317-3.015.317-3.015 4.934.326 7.523 5.052 7.523 5.052 4.367 7.496 11.404 5.378 14.235 4.074.404-3.178 1.699-5.378 3.074-6.6-10.839-1.195-22.262-5.379-22.262-24.022 0-5.395 1.962-9.778 5.052-13.233-.485-1.195-2.184-6.275.486-13.038 0 0 4.125-1.304 13.426 5.052a46.97 46.97 0 0 1 12.214-1.63c4.125 0 8.33.571 12.213 1.63 9.302-6.356 13.427-5.052 13.427-5.052 2.67 6.763.97 11.843.485 13.038 3.155 3.455 5.051 7.838 5.051 13.233 0 18.643-11.404 22.827-22.324 24.022 1.754 1.478 3.316 4.401 3.316 8.847 0 6.6-.08 11.897-.08 13.526 0 1.304.89 2.853 3.316 2.364 19.412-6.52 33.405-24.934 33.405-46.69C97.707 22 75.788 0 48.854 0z" />
-          </svg>
+          <span class="lobby-github__icon" aria-hidden="true">🕹️</span>
           <span class="lobby-github__text">GitHub</span>
         </a>
         <p class="lobby-attribution">Built with <strong class="lobby-attribution__brand">Cursor</strong>, Music by <strong class="lobby-attribution__brand">Suno</strong>, SFX by <strong class="lobby-attribution__brand">ElevenLabs</strong>, 3D Assets by <strong class="lobby-attribution__brand">Tripo3D</strong></p>
@@ -339,8 +337,7 @@ export class Lobby {
         this.epilogueStatuePreview.show();
         unlockModal.classList.add("lobby-unlock-modal--epilogue");
         unlockTitle.textContent = "The world is safe";
-        unlockBody.textContent =
-          "All five braziers now hold Eternal Flame. The moon will not fall on this world again. Whenever you play Tiny Skies, you can wander the sky without that last threat closing in. A memorial statue has been placed on the globe as a new landmark—fly by and see it. Thank you for flying for us all.";
+        unlockBody.textContent = `All five braziers now hold Eternal Flame. The moon will not fall on this world again. Whenever you play ${LOBBY_DISPLAY_TITLE}, you can wander the sky without that last threat closing in. A memorial statue has been placed on the globe as a new landmark—fly by and see it. Thank you for flying for us all.`;
       } else if (kind === "freeplay") {
         this.epilogueStatuePreview?.hide();
         this.unlockPreview?.hide();
@@ -595,7 +592,8 @@ export class Lobby {
       .lobby-github__icon {
         display: block;
         flex-shrink: 0;
-        opacity: 0.92;
+        font-size: 1.15rem;
+        line-height: 1;
       }
       .lobby-github__text {
         text-decoration: underline;
@@ -605,7 +603,7 @@ export class Lobby {
         color: #ffffff;
       }
       .lobby-github:hover .lobby-github__icon {
-        opacity: 1;
+        filter: brightness(1.08);
       }
       .lobby-header.visible ~ .lobby-github {
         opacity: 1;
