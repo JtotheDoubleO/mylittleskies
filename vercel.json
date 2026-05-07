@@ -2,5 +2,6 @@
   "installCommand": "npm install",
   "buildCommand": "npm run build -w client",
   "outputDirectory": "client/dist",
+  "rootDirectory": ".",
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
