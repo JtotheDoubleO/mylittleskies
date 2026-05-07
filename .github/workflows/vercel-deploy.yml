@@ -1,8 +1,7 @@
 # Optional: deploy from GitHub without opening vercel.com for each release.
-# One-time: add secrets VERCEL_TOKEN and VERCEL_ORG_ID in GitHub Actions.
-# (token: vercel.com/account/tokens; orgId: run `npx vercel whoami` locally)
+# One-time: add secrets VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+# (run `npx vercel link` locally — IDs are in .vercel/project.json; token: vercel.com/account/tokens)
 #
-# The project is hard-linked to "my-little-skies" (prj_eDjIDfLKz3MWpfohMZz52srf2NkS).
 # Vercel auto-build is disabled (exit 0) so only this CI deploys.
 #
 # Backend URL for the game client: edit `client/.env.production` in git (no Vercel env UI).
@@ -29,14 +28,9 @@ jobs:
 
       - run: npm ci
 
-      - name: Link to my-little-skies project
-        run: |
-          mkdir -p .vercel
-          echo '{"orgId":"${{ secrets.VERCEL_ORG_ID }}","projectId":"prj_eDjIDfLKz3MWpfohMZz52srf2NkS"}' > .vercel/project.json
-
       - name: Deploy to Vercel (production)
         run: npx vercel@latest --prod --yes
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: prj_eDjIDfLKz3MWpfohMZz52srf2NkS
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
