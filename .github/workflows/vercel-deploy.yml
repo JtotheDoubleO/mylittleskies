@@ -26,14 +26,8 @@ jobs:
 
       - run: rm -rf .vercel
 
-      - run: npm ci
-
-      - name: Build client
-        run: npm run build -w client
-        working-directory: client
-
       - name: Deploy to Vercel (production)
-        run: npx vercel@latest --prod --yes --built-project-directory=dist
+        run: npx vercel@latest --prod --yes
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
