@@ -581,8 +581,8 @@ export class Lobby {
 
       .lobby-github {
         position: fixed;
-        right: max(12px, calc(env(safe-area-inset-right, 0px) + 8px));
-        bottom: max(12px, calc(env(safe-area-inset-bottom, 0px) + 8px));
+        right: env(safe-area-inset-right, 0px);
+        bottom: env(safe-area-inset-bottom, 0px);
         z-index: 102;
         pointer-events: auto;
         display: inline-flex;
@@ -590,10 +590,11 @@ export class Lobby {
         gap: 6px;
         box-sizing: border-box;
         min-height: 40px;
-        padding: 5px 14px 5px 10px;
+        padding: 8px 14px 10px 14px;
         background: #000000;
         border: 1px solid rgba(110, 185, 255, 0.42);
-        border-radius: 9999px;
+        /* Flush to bottom-right like the Vibe Jam widget: only top-left is rounded. */
+        border-radius: 22px 0 0 0;
         box-shadow:
           0 2px 10px rgba(0, 0, 0, 0.55),
           inset 0 1px 0 rgba(255, 255, 255, 0.07);
