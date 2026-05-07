@@ -382,7 +382,7 @@ export class TouchControls {
       .tc-right-col {
         position: absolute;
         right: max(12px, calc(8px + env(safe-area-inset-right)));
-        /* sit above Vibe Jam / other bottom-rail UI */
+        /* sit above bottom-rail UI */
         bottom: max(50px, calc(22px + env(safe-area-inset-bottom)));
         display: flex;
         flex-direction: column;

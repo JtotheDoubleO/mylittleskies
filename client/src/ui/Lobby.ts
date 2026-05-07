@@ -1,10 +1,5 @@
 import type { Vehicle } from "@mylittleskies/shared";
 import { ProgressionManager } from "../game/ProgressionManager";
-import {
-  BOAT_HULL_PALETTE,
-  CARPET_HULL_PALETTE,
-  PLANE_HULL_PALETTE,
-} from "../game/vehicleColors";
 import { EpilogueStatuePreview } from "./EpilogueStatuePreview";
 import { VehicleUnlockPreview } from "./VehicleUnlockPreview";
 
@@ -25,11 +20,7 @@ const VEHICLE_ICON_SRC: Record<Vehicle, string> = {
   boat: "/2D/icon_boat.svg",
 };
 
-const LOBBY_DISPLAY_TITLE = "Tiny Skies";
-
-const VIBEJAM_PORTAL_BASE = "https://vibejam.cc/portal/2026";
-/** Rough cruise speed (m/s) for webring query continuity. */
-const VIBEJAM_PORTAL_SPEED = "1.6";
+const LOBBY_DISPLAY_TITLE = "My Little Skies";
 const PORTAL_ICON_SRC = "/2D/icon_portal.svg";
 
 /** Last per-letter animation index (non-space chars); drives tagline entrance delay. */
@@ -128,37 +119,6 @@ export class Lobby {
     return `Level ${n}`;
   }
 
-  private vehicleColorHexForSelectedVehicle(): string {
-    const v = this.selectedVehicle;
-    const saved = ProgressionManager.loadVehicle(v)?.vehicleColor;
-    if (saved != null) {
-      return `#${saved.toString(16).padStart(6, "0")}`;
-    }
-    const pal =
-      v === "boat" ? BOAT_HULL_PALETTE : v === "carpet" ? CARPET_HULL_PALETTE : PLANE_HULL_PALETTE;
-    return `#${pal[0]!.toString(16).padStart(6, "0")}`;
-  }
-
-  private vibejamPortalHref(): string {
-    const params = new URLSearchParams();
-    const name = this.options.playerName.trim();
-    if (name.length > 0) params.set("username", name);
-    params.set("color", this.vehicleColorHexForSelectedVehicle());
-    params.set("speed", VIBEJAM_PORTAL_SPEED);
-    try {
-      params.set("ref", window.location.href.split("#")[0] ?? "");
-    } catch {
-      /* ignore */
-    }
-    const q = params.toString();
-    return q.length > 0 ? `${VIBEJAM_PORTAL_BASE}?${q}` : VIBEJAM_PORTAL_BASE;
-  }
-
-  private updateVibejamPortalLink(): void {
-    const a = this.el.querySelector(".lobby-vibejam-portal") as HTMLAnchorElement | null;
-    if (a) a.href = this.vibejamPortalHref();
-  }
-
   private buildVehicleButtonsHTML(): string {
     return VEHICLE_ORDER.map((v) => {
       const unlocked = ProgressionManager.isVehicleUnlocked(v);
@@ -241,17 +201,17 @@ export class Lobby {
             <button type="button" class="lobby-unlock-ok" id="btn-unlock-ok">Got it</button>
           </div>
         </div>
+        <p class="lobby-attribution">Built with <strong class="lobby-attribution__brand">Cursor</strong>, Music by <strong class="lobby-attribution__brand">Suno</strong>, SFX by <strong class="lobby-attribution__brand">ElevenLabs</strong>, 3D Assets by <strong class="lobby-attribution__brand">Tripo3D</strong></p>
         <a
-          class="lobby-vibejam-portal"
-          href="${VIBEJAM_PORTAL_BASE}"
+          class="lobby-vibejam-portal lobby-vibejam-portal--rail-right"
+          href="https://github.com/JtotheDoubleO"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Vibe Jam 2026 — continue to the next game in the webring"
+          aria-label="View source on GitHub"
         >
           <img src="${PORTAL_ICON_SRC}" alt="" width="26" height="26" decoding="async" />
-          <span class="lobby-vibejam-portal__label" aria-hidden="true">Vibejam Portal</span>
+          <span class="lobby-vibejam-portal__label" aria-hidden="true">_jooie98</span>
         </a>
-        <p class="lobby-attribution">Built with <strong class="lobby-attribution__brand">Cursor</strong>, Music by <strong class="lobby-attribution__brand">Suno</strong>, SFX by <strong class="lobby-attribution__brand">ElevenLabs</strong>, 3D Assets by <strong class="lobby-attribution__brand">Tripo3D</strong></p>
       </div>
     `;
 
@@ -269,7 +229,6 @@ export class Lobby {
           this.options.playerName = result.trim();
           nameEl.textContent = result.trim();
           this.options.onNameChange?.(this.options.playerName);
-          this.updateVibejamPortalLink();
         }
       };
       editBtn.addEventListener("click", promptName);
@@ -300,7 +259,6 @@ export class Lobby {
           nameEl.textContent = trimmed;
         }
         this.options.onNameChange?.(this.options.playerName);
-        this.updateVibejamPortalLink();
       });
     }
 
@@ -327,7 +285,6 @@ export class Lobby {
         el.classList.toggle("active", on);
         el.setAttribute("aria-checked", on ? "true" : "false");
       });
-      this.updateVibejamPortalLink();
     };
 
     vehiclesEl.querySelectorAll(".lobby-vbtn:not(.locked)").forEach((btn) => {
@@ -379,8 +336,7 @@ export class Lobby {
         this.epilogueStatuePreview.show();
         unlockModal.classList.add("lobby-unlock-modal--epilogue");
         unlockTitle.textContent = "The world is safe";
-        unlockBody.textContent =
-          "All five braziers now hold Eternal Flame. The moon will not fall on this world again. Whenever you play Tiny Skies, you can wander the sky without that last threat closing in. A memorial statue has been placed on the globe as a new landmark—fly by and see it. Thank you for flying for us all.";
+        unlockBody.textContent = `All five braziers now hold Eternal Flame. The moon will not fall on this world again. Whenever you play ${LOBBY_DISPLAY_TITLE}, you can wander the sky without that last threat closing in. A memorial statue has been placed on the globe as a new landmark—fly by and see it. Thank you for flying for us all.`;
       } else if (kind === "freeplay") {
         this.epilogueStatuePreview?.hide();
         this.unlockPreview?.hide();
@@ -472,7 +428,6 @@ export class Lobby {
       }
     }
 
-    this.updateVibejamPortalLink();
     this.applyStyles();
   }
 
