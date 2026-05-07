@@ -1,9 +1,4 @@
-# Optional: deploy from GitHub without opening vercel.com for each release.
-# One-time: add secrets VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
-# (run `npx vercel link` locally — IDs are in .vercel/project.json; token: vercel.com/account/tokens)
-#
-# Backend URL for the game client: edit `client/.env.production` in git (no Vercel env UI).
-
+# Deploy client to Vercel
 name: Deploy client to Vercel
 
 on:
@@ -24,10 +19,12 @@ jobs:
           node-version: "22"
           cache: npm
 
-      - run: rm -rf .vercel
+      - run: npm ci
+
+      - run: npm run build -w client
 
       - name: Deploy to Vercel (production)
-        run: npx vercel@latest --prod --yes
+        run: npx vercel@latest deploy client/dist --prod --yes
         env:
           VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
