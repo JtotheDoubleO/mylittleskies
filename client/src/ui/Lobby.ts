@@ -22,7 +22,7 @@ const VEHICLE_ICON_SRC: Record<Vehicle, string> = {
 
 export const LOBBY_DISPLAY_TITLE = "My Little Skies";
 
-const LOBBY_GITHUB_HREF = "https://github.com/JtotheDoubleO/mylittleskies";
+const LOBBY_GITHUB_HREF = "https://github.com/JtotheDoubleO";
 
 /** Last per-letter animation index (non-space chars); drives tagline entrance delay. */
 const LOBBY_TITLE_LAST_CHAR_I = Math.max(
@@ -207,7 +207,7 @@ export class Lobby {
           href="${LOBBY_GITHUB_HREF}"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="GitHub repository"
+          aria-label="GitHub profile"
         >
           <span class="lobby-github__mark" aria-hidden="true">
             <svg class="lobby-github__joystick" viewBox="0 0 24 28" width="22" height="26" xmlns="http://www.w3.org/2000/svg" focusable="false">
