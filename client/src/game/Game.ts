@@ -2331,7 +2331,7 @@ export class Game {
     });
 
     const title = document.createElement("h1");
-    title.textContent = "My Little Skies";
+    title.textContent = "Tiny Skies";
     Object.assign(title.style, {
       fontFamily: "'Darumadrop One', 'Domine', Georgia, serif",
       fontSize: "clamp(3.5rem, 14vw, 8.4rem)",
